@@ -13,6 +13,8 @@
     "@better-auth/mongo-adapter": "^1.7.27",
     "@hookform/resolvers": "^7.0.8",
     "@tailwindcss/postcss": "^4.3.5",
+    "@types/aos": "^3.0.8",
+    "aos": "^2.3.4",
     "axios": "^1.21.1",
     "better-auth": "^1.7.27",
     "class-variance-authority": "^0.7.1",

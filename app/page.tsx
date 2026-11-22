@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { Search } from "lucide-react"
 import { TreatmentPicker } from "@/components/home/TreatmentPicker"
+import { SalonDiscovery } from "@/components/home/SalonDiscovery"
+import { Reviews } from "@/components/home/Reviews"
 
 const serviceCategories = [
   { label: "Hair", value: "Haircut & styling" },
@@ -18,12 +20,12 @@ export default function Home() {
     <main className="home-page">
       <section className="discovery-hero" aria-labelledby="discovery-title">
         <div className="discovery-content">
-          <h1 id="discovery-title">Your next favorite look starts here</h1>
-          <p className="discovery-description">
+          <h1 id="discovery-title" data-aos="fade-up">Your next favorite look starts here</h1>
+          <p className="discovery-description" data-aos="fade-up" data-aos-delay="100">
             Discover and book thoughtful salon services, all in one place.
           </p>
 
-          <form className="discovery-search" action="/services" method="get">
+          <form className="discovery-search" action="/services" method="get" data-aos="fade-up" data-aos-delay="180">
             <label className="discovery-service-query">
               <Search size={20} aria-hidden="true" />
               <input
@@ -53,6 +55,8 @@ export default function Home() {
           </nav>
         </div>
       </section>
+      <SalonDiscovery />
+      <Reviews />
     </main>
   )
 }
