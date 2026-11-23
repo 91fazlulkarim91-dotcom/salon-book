@@ -17,7 +17,7 @@ SalonBook is a salon discovery and booking app built with Next.js. The homepage 
 ## Requirements
 
 - Node.js and npm
-- MongoDB running locally at `mongodb://localhost:27017/database` (configured in `lib/auth.ts`)
+- MongoDB; locally, the app defaults to `mongodb://localhost:27017/database`
 - Google OAuth credentials to enable Google sign-in
 
 ## Getting started
@@ -38,13 +38,14 @@ Create a `.env.local` file in the project root:
 ```dotenv
 BETTER_AUTH_URL=http://localhost:3000
 BETTER_AUTH_SECRET=replace-with-a-long-random-secret
+MONGODB_URI=mongodb://localhost:27017/database
 GOOGLE_CLIENT_ID=your-google-oauth-client-id
 GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
 ```
 
-Keep secrets out of source control. Configure the Google OAuth consent screen and add the Better Auth Google callback URL for your deployment to the authorized redirect URIs. Google sign-in requires valid client credentials.
+Set these variables in Vercel for each environment you deploy. For production, use your deployed site URL for `BETTER_AUTH_URL`, a securely generated secret for `BETTER_AUTH_SECRET`, and a reachable hosted MongoDB connection string for `MONGODB_URI`. Keep secrets out of source control. Configure the Google OAuth consent screen and add the Better Auth Google callback URL for your deployment to the authorized redirect URIs. Google sign-in requires valid client credentials.
 
-The MongoDB connection string is currently set in `lib/auth.ts`; update it there if your MongoDB server uses a different address.
+If `MONGODB_URI` is unset, the app falls back to local MongoDB.
 
 ## Scripts
 
