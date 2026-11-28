@@ -33,19 +33,24 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Environment variables
 
-Create a `.env.local` file in the project root:
+Copy `.env.example` to `.env.local` in the project root and fill in the values:
 
 ```dotenv
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
 BETTER_AUTH_URL=http://localhost:3000
 BETTER_AUTH_SECRET=replace-with-a-long-random-secret
-MONGODB_URI=mongodb://localhost:27017/database
+JWT_EXPIRES_IN=15m
+MONGODB_URI=mongodb://localhost:27017/salonbook
+MONGODB_DB=salonbook
 GOOGLE_CLIENT_ID=your-google-oauth-client-id
 GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
 ```
 
-Set these variables in Vercel for each environment you deploy. For production, use your deployed site URL for `BETTER_AUTH_URL`, a securely generated secret for `BETTER_AUTH_SECRET`, and a reachable hosted MongoDB connection string for `MONGODB_URI`. Keep secrets out of source control. Configure the Google OAuth consent screen and add the Better Auth Google callback URL for your deployment to the authorized redirect URIs. Google sign-in requires valid client credentials.
+Set the public URLs and secrets in the Next.js deployment environment. `NEXT_PUBLIC_API_URL` points to the Express API; `NEXT_PUBLIC_BETTER_AUTH_URL` and `BETTER_AUTH_URL` point to the Next.js app hosting `/api/auth`. Use a securely generated `BETTER_AUTH_SECRET` and a reachable MongoDB URI/database. Keep `.env.local` and secrets out of source control. Configure Google OAuth credentials in the Next.js app and add its Better Auth callback URL to the authorized redirect URIs. The Stripe publishable key is public; do not put the Stripe secret key in the client environment.
 
-If `MONGODB_URI` is unset, the app falls back to local MongoDB.
+`JWT_EXPIRES_IN` controls Better Auth JWT lifetime and defaults to `15m`. The Express API verifies those JWTs through Better Auth's public JWKS, so it does not use a separate `JWT_SECRET`.
 
 ## Scripts
 
